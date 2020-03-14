@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+    h2 Creacion Nuevo alumno
+    //- atributo action = sirve para poner la ruta y el method = para poner el tipo de peticion GET/POST/etc
+    //-Cuando le doy al boton Enviar , hago una peticion post, envio los datos a la ruta students/create
+    form(action="/clientes/create", method="POST")
+        .form-group
+            label Nombre
+            input.form-control(type="text", name="nombre")
+        .form-group
+            label Apellidos
+            input.form-control(type="text", name="apellidos")
+        .form-group
+            label Edad
+            input.form-control(type="text", name="edad")
+        .form-group
+            label Email
+            input.form-control(type="text", name="email")
+        .form-group
+            label Numero Matricula
+            input.form-control(type="text", name="numMatricula")
+        input.btn.btn-block.btn-info(type="submit",value="Enviar")
