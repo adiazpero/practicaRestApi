@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Cliente = require('../../models/cliente');
+const { check, validationResult } = require('express-validator');
 
 
 //GET http://localhost:3000/api/clientes/getall
@@ -17,18 +18,29 @@ router.get('/:clienteId', async(req, res) => {
 
 
 //POST http://localhost:3000/api/clientes/create
-router.post('/create', async(req, res) => {
-    const result = await Cliente.create(req.body);
-    res.json(result);
-    /*  
-     if (result['affectedRows'] === 1) {
-        
-         res.json({ success: 'El cliente creado' });
-     } else {
-         res.json({ error: "El cliente no se ha creado" });
-     } */
-    //res.json(result);
-});
+router.post('/create', [
+        check('nombre').isLength({ min: 3 }),
+        check('apellidos').isLength({ min: 3 }),
+        check('direccion').isLength({ min: 3 }),
+        check('email').isEmail(),
+        check('edad').isNumeric(),
+        check('sexo').isLength({ min: 1 }),
+        check('cuota').isDecimal(),
+        check('fecha_nacimiento'),
+        check('dni').custom((value) => {
+            return (/^[a-zA-Z0-9]{5,10}$/).test(value);
+        })
+    ],
+    async(req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json(errors.array());
+        }
+        let result = await Cliente.create(req.body);
+        res.json(result);
+    });
+
+
 
 
 //PUT http://localhost:3000/api/clientes/update

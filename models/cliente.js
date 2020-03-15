@@ -28,7 +28,7 @@ const create = ({ nombre, apellidos, direccion, email, edad, sexo, cuota, fecha_
     return new Promise((resolve, reject) => {
         db.query('insert into clientes (nombre, apellidos, direccion, email, edad, sexo, fecha_inscripcion,cuota, fecha_nacimiento, dni, fk_profesor) values (?,?,?,?,?,?,?,?,?,?,?)', [nombre, apellidos, direccion, email, edad, sexo, new Date(), cuota, fecha_nacimiento, dni, profesor]),
             (err, result) => {
-                console.log(err)
+
                 if (err) reject(err);
                 resolve(result);
             }
