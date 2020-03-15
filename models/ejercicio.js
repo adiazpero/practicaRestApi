@@ -1,6 +1,6 @@
 const getAll = () => {
     return new Promise((resolve, reject) => {
-        db.query('select * from clientes', (err, rows) => {
+        db.query('select * from ejercicios', (err, rows) => {
             if (err) reject(err)
             resolve(rows);
         });
@@ -8,11 +8,14 @@ const getAll = () => {
 };
 
 
-const getById = (pClienteId) => {
+
+
+
+const getById = (pEjerciciosId) => {
     return new Promise((resolve, reject) => {
-        db.query('select*from clientes where id = ?', [pClienteId], (err, rows) => {
+        db.query('select*from ejercicios where id = ?', [pEjerciciosId], (err, rows) => {
             if (err) reject(err);
-            if (rows.length === 0) { //esto es, si la query no me devuelve nada, porque no hay registros, devuelveme un null
+            if (rows.length === 0) {
                 resolve(null);
             }
             resolve(rows[0]);
@@ -23,9 +26,9 @@ const getById = (pClienteId) => {
 
 
 
-const create = ({ nombre, apellidos, direccion, email, edad, sexo, cuota, fecha_nacimiento, dni, profesor }) => {
+const create = ({ titulo, duracion, repeticiones }) => {
     return new Promise((resolve, reject) => {
-        db.query('insert into clientes (nombre, apellidos, direccion, email, edad, sexo, fecha_inscripcion,cuota, fecha_nacimiento, dni, fk_profesor) value (?,?,?,?,?,?,?,?,?,?,?)', [nombre, apellidos, direccion, email, edad, sexo, new Date(), cuota, fecha_nacimiento, dni, profesor]),
+        db.query('insert into ejercicios (titulo, duracion, repeticiones) values (?,?,?)', [titulo, duracion, repeticiones]),
             (err, result) => {
                 console.log(err)
                 if (err) reject(err);
@@ -37,9 +40,9 @@ const create = ({ nombre, apellidos, direccion, email, edad, sexo, cuota, fecha_
 
 
 
-const deleteById = (pClienteId) => {
+const deleteById = (pEjercicioId) => {
     return new Promise((resolve, reject) => {
-        db.query('delete from clientes where id = ?', [pClienteId],
+        db.query('delete from ejercicios where id = ?', [pEjercicioId],
             (err, result) => {
                 if (err) reject(err);
                 resolve(result);
