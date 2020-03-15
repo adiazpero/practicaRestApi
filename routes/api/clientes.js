@@ -52,7 +52,7 @@ router.put('/update', async(req, res) => {
     } else {
         res.json({ error: "El cliente no se ha actualizado" });
     }
-    //res.json(result);
+
 });
 
 //DELETE http://localhost:3000/api/clientes/delete
@@ -63,7 +63,7 @@ router.delete('/delete', async(req, res) => {
     } else {
         res.json({ error: 'No se ha eliminado el cliente' })
     }
-    //res.json(result);
+
 });
 
 

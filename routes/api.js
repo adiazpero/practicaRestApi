@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const apiClientesRouter = require('./api/clientes');
 const apiEjerciciosRouter = require('./api/ejercicios');
+const apiProfesoresRouter = require('./api/profesores');
 
 
 
@@ -9,6 +10,7 @@ const apiEjerciciosRouter = require('./api/ejercicios');
 
 router.use('/clientes', apiClientesRouter);
 router.use('/ejercicios', apiEjerciciosRouter);
+router.use('/profesores', apiProfesoresRouter);
 
 
 
