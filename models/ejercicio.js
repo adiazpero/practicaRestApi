@@ -40,6 +40,19 @@ const create = ({ titulo, duracion, repeticiones }) => {
 
 
 
+const update = ({ titulo, duracion, repeticiones, id }) => {
+    return new Promise((resolve, reject) => {
+        db.query('update ejercicios set titulo=?, duracion=?, repeticiones=? where id=? ', [titulo, duracion, repeticiones, id]),
+            (err, result) => {
+                console.log(err)
+                if (err) reject(err);
+                resolve(result);
+            }
+    });
+}
+
+
+
 const deleteById = (pEjercicioId) => {
     return new Promise((resolve, reject) => {
         db.query('delete from ejercicios where id = ?', [pEjercicioId],
@@ -57,5 +70,6 @@ module.exports = {
     getAll: getAll,
     getById: getById,
     create: create,
+    update: update,
     deleteById: deleteById
 }

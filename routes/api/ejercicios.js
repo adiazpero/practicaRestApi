@@ -20,38 +20,30 @@ router.get('/:ejercicioId', async(req, res) => {
 router.post('/create', async(req, res) => {
     const result = await Ejercicio.create(req.body);
     res.json(result);
-    /*  
-     if (result['affectedRows'] === 1) {
-        
-         res.json({ success: 'El cliente creado' });
-     } else {
-         res.json({ error: "El cliente no se ha creado" });
-     } */
-    //res.json(result);
 });
+
 
 
 //PUT http://localhost:3000/api/ejercicios/update
 router.put('/update', async(req, res) => {
     const result = await Ejercicio.update(req.body);
     if (result['affectedRows'] === 1) {
-
-        res.json({ success: 'El cliente se ha actualizado' });
+        res.json({ success: 'El ejercicio se ha actualizado' });
     } else {
-        res.json({ error: "El cliente no se ha actualizado" });
+        res.json({ error: "El ejercicio no se ha actualizado" });
     }
-    //res.json(result);
 });
+
+
 
 //DELETE http://localhost:3000/api/ejercicios/delete
 router.delete('/delete', async(req, res) => {
-    const result = await Ejercicio.deleteById(req.body.ejercicioId);
+    const result = await Ejercicio.deleteById(req.body.id);
     if (result['affectedRows'] === 1) {
-        res.json({ success: 'Se ha eliminado el cliente' });
+        res.json({ success: 'Se ha eliminado el ejercicio' });
     } else {
-        res.json({ error: 'No se ha eliminado el cliente' })
+        res.json({ error: 'No se ha eliminado el ejercicio' })
     }
-    //res.json(result);
 });
 
 
